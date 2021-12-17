@@ -474,7 +474,7 @@ import "./index.css";
 // class Switch extends React.Component {
 //   constructor(props) {
 //     super(props);
-//     this.state = { switchState: true };
+//     this.state = { switchState: true, name: "rahul" };
 //     this.handleToggle = this.handleToggle.bind(this);
 //   }
 
@@ -489,12 +489,12 @@ import "./index.css";
 //     this.setState((oldState) => {
 //       return { switchState: !oldState.switchState };
 //     });
-
 //   }
 
 //   render() {
 //     return (
 //       <div>
+//         <div>{this.state.name}</div>
 //         <button onClick={this.handleToggle}>
 //           {this.state.switchState ? "On" : "Off"}
 //         </button>
@@ -505,20 +505,28 @@ import "./index.css";
 
 // ReactDOM.render(<Switch />, document.getElementById("root"));
 
-function Switch() {
-  const [switchState, setSwitchState] = useState(true);
-  return (
-    <div>
-      <button
-        onClick={() => {
-          setSwitchState((oldSwitchState) => {
-            return !oldSwitchState;
-          });
-        }}
-      >
-        {switchState ? "ON" : "OFF"}
-      </button>
-    </div>
-  );
-}
-ReactDOM.render(<Switch />, document.getElementById("root"));
+// function Switch() {
+//   const [switchState, setSwitchState] = useState({ name: "Rahul", bulb: true });
+//   // const [name, setName] = useState("Rahul");
+
+//   // const array = useState(true);
+//   // const switchState = array[0];
+//   // const setSwitchState = array[1];
+//   return (
+//     <div>
+//       <div>{switchState.name}</div>
+//       <button
+//         onClick={() => {
+//           setSwitchState((oldSwitchState) => {
+//             return { ...oldSwitchState, bulb: !oldSwitchState.bulb };
+//           });
+//         }}
+//       >
+//         {switchState.bulb ? "ON" : "OFF"}
+//       </button>
+//     </div>
+//   );
+// }
+// ReactDOM.render(<Switch />, document.getElementById("root"));
+
+
