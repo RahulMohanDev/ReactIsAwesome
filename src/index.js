@@ -559,24 +559,76 @@ import NavElement from "./NavElement";
 //   );
 // }
 
+// context with hooks
+
 // ReactDOM.render(<Cart />, document.getElementById("root"));
 
-function Toolbar() {
-  const [theme, setTheme] = useState("light");
-  function handleThemeChange() {
-    setTheme((oldTheme) => {
-      if (oldTheme === "light") {
-        return "dark";
-      }
-      return "light";
-    });
-  }
+// function Toolbar() {
+//   const [theme, setTheme] = useState("light");
+//   function handleThemeChange() {
+//     setTheme((oldTheme) => {
+//       if (oldTheme === "light") {
+//         return "dark";
+//       }
+//       return "light";
+//     });
+//   }
+//   return (
+//     <ThemeContext.Provider value={theme}>
+//       <NavElement />
+//       <button onClick={handleThemeChange}>{theme}</button>
+//     </ThemeContext.Provider>
+//   );
+// }
+
+// ReactDOM.render(<Toolbar />, document.getElementById("root"));
+
+// HOC (higherOrderComponent)
+
+function withMentalState(Component, defaultState) {
+  return () => {
+    // this is the repeated code
+    const [mentalState, setMetalState] = useState(defaultState);
+    return (
+      <Component mentalState={mentalState} setMetalState={setMetalState} />
+    );
+  };
+}
+
+function IamHip({ mentalState, setMetalState }) {
+  // const [mentalState, setMetalState] = useState(defaultState);
+  return <h1>I am hip and my mental state is {mentalState}</h1>;
+}
+
+function NormalHuman({ mentalState, setMetalState }) {
   return (
-    <ThemeContext.Provider value={theme}>
-      <NavElement />
-      <button onClick={handleThemeChange}>{theme}</button>
-    </ThemeContext.Provider>
+    <div>
+      I am {mentalState}
+      <button
+        onClick={() => {
+          setMetalState("happy");
+        }}
+      >
+        Be happy
+      </button>
+      <button
+        onClick={() => {
+          setMetalState("sad");
+        }}
+      >
+        Be sad because I don't have illegal shit
+      </button>
+    </div>
   );
 }
 
-ReactDOM.render(<Toolbar />, document.getElementById("root"));
+const IamHIPWithMentalState = withMentalState(IamHip, "Happy");
+const NormalHumanMentalState = withMentalState(NormalHuman, "ok");
+
+ReactDOM.render(
+  <div>
+    <IamHIPWithMentalState />
+    <NormalHumanMentalState />
+  </div>,
+  document.getElementById("root")
+);
