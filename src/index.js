@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import ThemeContext from "./theme-provider";
+import NavElement from "./NavElement";
 
 // const Rahul = () => {
 //   return <div>Rahul is the worst dev</div>;
@@ -529,4 +531,52 @@ import "./index.css";
 // }
 // ReactDOM.render(<Switch />, document.getElementById("root"));
 
+// function ShoppingList({ list, onListChange }) {
+//   return (
+//     <div>
+//       <ul>
+//         {list.map((item) => {
+//           return <li key={item}>{item}</li>;
+//         })}
+//       </ul>
+//     </div>
+//   );
+// }
 
+// function Cart() {
+//   const [list, setList] = useState([50, 400]);
+//   return (
+//     <>
+//       <ShoppingList list={list} onListChange={setList} />
+//       <div>
+//         Total Amount is :{" "}
+//         {list.reduce((pre, current) => {
+//           return pre + current;
+//         }, 0)}
+//       </div>
+//       ;
+//     </>
+//   );
+// }
+
+// ReactDOM.render(<Cart />, document.getElementById("root"));
+
+function Toolbar() {
+  const [theme, setTheme] = useState("light");
+  function handleThemeChange() {
+    setTheme((oldTheme) => {
+      if (oldTheme === "light") {
+        return "dark";
+      }
+      return "light";
+    });
+  }
+  return (
+    <ThemeContext.Provider value={theme}>
+      <NavElement />
+      <button onClick={handleThemeChange}>{theme}</button>
+    </ThemeContext.Provider>
+  );
+}
+
+ReactDOM.render(<Toolbar />, document.getElementById("root"));
