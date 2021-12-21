@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import ThemeContext from "./theme-provider";
 import NavElement from "./NavElement";
+import img from "./cat.jpg";
+import stupidRahulImage from "./stupidRahul.jpg";
 
 // const Rahul = () => {
 //   return <div>Rahul is the worst dev</div>;
@@ -585,35 +587,255 @@ import NavElement from "./NavElement";
 
 // HOC (higherOrderComponent)
 
-function withMentalState(Component, defaultState) {
-  return () => {
-    // this is the repeated code
-    const [mentalState, setMetalState] = useState(defaultState);
-    return (
-      <Component mentalState={mentalState} setMetalState={setMetalState} />
-    );
-  };
+// function withMentalState(Component, defaultState) {
+//   return () => {
+//     // this is the repeated code
+//     const [mentalState, setMetalState] = useState(defaultState);
+//     return (
+//       <Component mentalState={mentalState} setMetalState={setMetalState} />
+//     );
+//   };
+// }
+
+// function IamHip({ mentalState, setMetalState }) {
+//   // const [mentalState, setMetalState] = useState(defaultState);
+//   return <h1>I am hip and my mental state is {mentalState}</h1>;
+// }
+
+// function NormalHuman({ mentalState, setMetalState }) {
+//   return (
+//     <div>
+//       I am {mentalState}
+//       <button
+//         onClick={() => {
+//           setMetalState("happy");
+//         }}
+//       >
+//         Be happy
+//       </button>
+//       <button
+//         onClick={() => {
+//           setMetalState("sad");
+//         }}
+//       >
+//         Be sad because I don't have illegal shit
+//       </button>
+//     </div>
+//   );
+// }
+
+// const IamHIPWithMentalState = withMentalState(IamHip, "Happy");
+// const NormalHumanMentalState = withMentalState(NormalHuman, "ok");
+
+// ReactDOM.render(
+//   <div>
+//     <IamHIPWithMentalState />
+//     <NormalHumanMentalState />
+//   </div>,
+//   document.getElementById("root")
+// );
+
+// renderProps in class
+
+// class Cat extends React.Component {
+//   render() {
+//     const mouse = this.props.mouse;
+//     return (
+//       <img
+//         src={img}
+//         style={{
+//           position: "absolute",
+//           left: mouse.x,
+//           top: mouse.y,
+//           width: "150px",
+//         }}
+//         alt="some cat images"
+//       />
+//     );
+//   }
+// }
+
+// class StupidRahul extends React.Component {
+//   render() {
+//     const mouse = this.props.mouse;
+//     return (
+//       <img
+//         src={stupidRahulImage}
+//         style={{
+//           position: "absolute",
+//           left: mouse.x,
+//           top: mouse.y,
+//           width: "50px",
+//         }}
+//         alt="some cat images"
+//       />
+//     );
+//   }
+// }
+
+// class Mouse extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.handleMouseMove = this.handleMouseMove.bind(this);
+//     this.state = { x: 0, y: 0 };
+//   }
+
+//   handleMouseMove(event) {
+//     this.setState({
+//       x: event.clientX,
+//       y: event.clientY,
+//     });
+//   }
+
+//   render() {
+//     return (
+//       <div style={{ height: "100vh" }} onMouseMove={this.handleMouseMove}>
+//         {/*
+//           <StupidRahul mouse={this.state}>
+//           <Cat mouse={this.state}
+//         */}
+//         {this.props.render(this.state)}
+//       </div>
+//     );
+//   }
+// }
+
+// class MouseTracker extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <h1>Move the mouse around!</h1>
+//         <Mouse render={(mouse) => <StupidRahul mouse={mouse} />} />
+//       </div>
+//     );
+//   }
+// }
+
+// ReactDOM.render(<MouseTracker />, document.getElementById("root"));
+
+// function Cat({ mouse }) {
+//   return (
+//     <img
+//       src={img}
+//       style={{
+//         position: "absolute",
+//         left: mouse.x,
+//         top: mouse.y,
+//         width: "150px",
+//       }}
+//       alt="some cat images"
+//     />
+//   );
+// }
+
+// function StupidRahul({ mouse }) {
+//   return (
+//     <img
+//       src={stupidRahulImage}
+//       style={{
+//         position: "absolute",
+//         left: mouse.x,
+//         top: mouse.y,
+//         width: "50px",
+//       }}
+//       alt="some cat images"
+//     />
+//   );
+// }
+
+// function Mouse({ render }) {
+//   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+//   function handleMouseMove(e) {
+//     setMouse({
+//       x: e.clientX,
+//       y: e.clientY,
+//     });
+//   }
+
+//   return (
+//     <div style={{ height: "100vh" }} onMouseMove={handleMouseMove}>
+//       {/*
+//           <StupidRahul mouse={mouse}>
+//           <Cat mouse={mose}
+//         */}
+//       {render(mouse)}
+//     </div>
+//   );
+// }
+
+// function MouseTracker() {
+//   return (
+//     <div>
+//       <h1>Move the mouse around!</h1>
+//       <Mouse render={(mouse) => <StupidRahul mouse={mouse} />} />
+//     </div>
+//   );
+// }
+
+// ReactDOM.render(<MouseTracker />, document.getElementById("root"));
+
+// customHooks
+
+function useMentalState(defaultState) {
+  const [mentalState, setMentalState] = useState(defaultState);
+  function handleMentalState(type) {
+    if (type === 1) {
+      setMentalState("happy");
+    }
+    if (type === 2) {
+      setMentalState("sad and it is not a good feeling");
+    }
+    if (type === 3) {
+      setMentalState("high");
+    }
+  }
+  return [mentalState, handleMentalState];
 }
 
-function IamHip({ mentalState, setMetalState }) {
-  // const [mentalState, setMetalState] = useState(defaultState);
-  return <h1>I am hip and my mental state is {mentalState}</h1>;
+function IamHip() {
+  // const [mentalState, setMentalState] = useState(defaultState);
+  // function handleMentalState(type) {
+  //   if (type === 1) {
+  //     setMentalState("happy");
+  //   }
+  //   if (type === 2) {
+  //     setMentalState("sad and it is not a good feeling");
+  //   }
+  //   if (type === 3) {
+  //     setMentalState("high");
+  //   }
+  // }
+  const [mentalState, handleHipState] = useMentalState("happy");
+  return (
+    <div>
+      <h1>I am hip and my mental state is {mentalState}</h1>
+      <button
+        onClick={() => {
+          handleHipState(3);
+        }}
+      >
+        Some illegal stuff
+      </button>
+    </div>
+  );
 }
 
-function NormalHuman({ mentalState, setMetalState }) {
+function NormalHuman() {
+  const [mentalState, handleMentalState] = useMentalState("ok");
   return (
     <div>
       I am {mentalState}
       <button
         onClick={() => {
-          setMetalState("happy");
+          handleMentalState(1);
         }}
       >
         Be happy
       </button>
       <button
         onClick={() => {
-          setMetalState("sad");
+          handleMentalState(2);
         }}
       >
         Be sad because I don't have illegal shit
@@ -622,13 +844,10 @@ function NormalHuman({ mentalState, setMetalState }) {
   );
 }
 
-const IamHIPWithMentalState = withMentalState(IamHip, "Happy");
-const NormalHumanMentalState = withMentalState(NormalHuman, "ok");
-
 ReactDOM.render(
   <div>
-    <IamHIPWithMentalState />
-    <NormalHumanMentalState />
+    <IamHip />
+    <NormalHuman />
   </div>,
   document.getElementById("root")
 );
